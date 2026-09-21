@@ -1,0 +1,39 @@
+<%= form_with model: menu_item do |f| %>
+  <% if menu_item.errors.any? %>
+    <div>
+      <h2><%= pluralize(menu_item.errors.count, "Fehler") %>:</h2>
+      <ul>
+        <% menu_item.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+
+  <div>
+    <%= f.label :department %><br>
+    <%= f.select :department, MenuItem::DEPARTMENTS %>
+  </div>
+
+  <div>
+    <%= f.label :available %>
+    <%= f.check_box :available %>
+  </div>
+
+  <%= f.submit "Speichern" %>
+<% end %>

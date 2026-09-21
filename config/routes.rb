@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   resource :profile, only: [:show, :edit, :update]
   resources :employees, only: [:index, :edit, :update, :destroy]
-  root "sessions#new"
+  resources :menu_items, path: "menu"
+  root "menu_items#index"
 
 end

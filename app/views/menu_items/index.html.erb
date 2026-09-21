@@ -1,0 +1,21 @@
+<h1>Speisekarte</h1>
+
+<% if logged_in? && policy(MenuItem).create? %>
+  <%= link_to "Neuen Artikel anlegen", new_menu_item_path %>
+<% end %>
+
+<% @menu_items.group_by(&:department).each do |department, items| %>
+  <h2><%= department == "kitchen" ? "Küche" : "Bar" %></h2>
+  <ul>
+    <% items.each do |item| %>
+      <li>
+        <strong><%= item.name %></strong> – CHF <%= item.price %>
+        <% unless item.available? %> (ausverkauft) <% end %>
+        <%= item.description %>
+        <% if logged_in? && policy(item).update? %>
+          <%= link_to "Bearbeiten", edit_menu_item_path(item) %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
