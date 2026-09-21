@@ -1,0 +1,33 @@
+<h1>Mitarbeiterübersicht</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>E-Mail</th>
+      <th>Rolle</th>
+      <th>Aktiv</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= employee.name %></td>
+        <td><%= employee.email %></td>
+        <td><%= employee.role %></td>
+        <td><%= employee.active? ? "Ja" : "Nein" %></td>
+        <td>
+          <%= link_to "Bearbeiten", edit_employee_path(employee) %>
+          <% if policy(employee).destroy? %>
+            <%= button_to "Löschen", employee_path(employee), method: :delete, form: { data: { turbo_confirm: "Wirklich löschen?" } } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Neuen Mitarbeiter anlegen", new_registration_path %>
+<br>
+<%= link_to "Zurück zum Dashboard", dashboard_path %>

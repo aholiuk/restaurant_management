@@ -14,7 +14,15 @@ class EmployeePolicy < ApplicationPolicy
     user&.manager?
   end
 
+  def edit?
+    user&.manager?
+  end
+
   def update?
     user&.manager?
+  end
+
+  def destroy?
+    user&.manager? && user != record
   end
 end

@@ -1,0 +1,33 @@
+<h1>Mitarbeiter bearbeiten</h1>
+
+<%= form_with model: @employee, url: employee_path(@employee), method: :patch do |f| %>
+  <% if @employee.errors.any? %>
+    <div>
+      <h2><%= pluralize(@employee.errors.count, "Fehler") %>:</h2>
+      <ul>
+        <% @employee.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :role %><br>
+    <%= f.select :role, Employee::ROLES %>
+  </div>
+
+  <div>
+    <%= f.label :active %>
+    <%= f.check_box :active %>
+  </div>
+
+  <%= f.submit "Speichern" %>
+<% end %>
+
+<%= link_to "Zurück zur Übersicht", employees_path %>

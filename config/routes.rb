@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resource :registration, only: [:new, :create]
   resource :session, only: [:new, :create, :destroy]
   resource :profile, only: [:show, :edit, :update]
+  resources :employees, only: [:index, :edit, :update, :destroy]
   root "sessions#new"
 
 end

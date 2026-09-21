@@ -3,3 +3,7 @@
 
 <%= button_to "Abmelden", session_path, method: :delete %>
 <%= link_to "Mein Profil", profile_path %>
+
+<% if policy(Employee).index? %>
+  <%= link_to "Mitarbeiterverwaltung", employees_path %>
+<% end %>
