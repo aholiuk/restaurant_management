@@ -1,0 +1,27 @@
+manager:
+  name: Anna Holiuk
+  email: anna@restaurant.test
+  password_digest: <%= BCrypt::Password.create("geheim123456") %>
+  role: manager
+  active: true
+
+server:
+  name: Lisa Kellner
+  email: lisa@restaurant.test
+  password_digest: <%= BCrypt::Password.create("geheim123456") %>
+  role: server
+  active: true
+
+kitchen:
+  name: Marco Koch
+  email: marco@restaurant.test
+  password_digest: <%= BCrypt::Password.create("geheim123456") %>
+  role: kitchen
+  active: true
+
+bar:
+  name: Sara Barkeeperin
+  email: sara@restaurant.test
+  password_digest: <%= BCrypt::Password.create("geheim123456") %>
+  role: bar
+  active: true
