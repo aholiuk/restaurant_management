@@ -1,0 +1,47 @@
+<h1>Profil bearbeiten</h1>
+
+<%= form_with model: @employee, url: profile_path, method: :patch do |f| %>
+  <% if @employee.errors.any? %>
+    <div>
+      <h2><%= pluralize(@employee.errors.count, "Fehler") %>:</h2>
+      <ul>
+        <% @employee.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <hr>
+  <p>Nur ausfüllen, wenn du dein Passwort ändern möchtest:</p>
+
+  <div>
+    <%= f.label :current_password, "Aktuelles Passwort" %><br>
+    <%= f.password_field :current_password %>
+  </div>
+
+  <div>
+    <%= f.label :password, "Neues Passwort" %><br>
+    <%= f.password_field :password %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation, "Neues Passwort bestätigen" %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <hr>
+  <p>Nur ausfüllen, wenn du deine E-Mail ändern möchtest:</p>
+
+  <div>
+    <%= f.label :new_email, "Neue E-Mail-Adresse" %><br>
+    <%= f.email_field :new_email %>
+  </div>
+
+  <%= f.submit "Speichern" %>
+<% end %>

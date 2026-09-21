@@ -1,0 +1,8 @@
+<h1>Mein Profil</h1>
+
+<p><strong>Name:</strong> <%= @employee.name %></p>
+<p><strong>E-Mail:</strong> <%= @employee.email %></p>
+<p><strong>Rolle:</strong> <%= @employee.role %></p>
+
+<%= link_to "Profil bearbeiten", edit_profile_path %>
+<%= link_to "Zurück zum Dashboard", dashboard_path %>
