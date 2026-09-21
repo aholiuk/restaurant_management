@@ -1,0 +1,36 @@
+<h1>Registrieren</h1>
+
+<%= form_with model: @employee, url: registration_path do |f| %>
+  <% if @employee.errors.any? %>
+    <div>
+      <h2><%= pluralize(@employee.errors.count, "Fehler") %>:</h2>
+      <ul>
+        <% @employee.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :email %><br>
+    <%= f.email_field :email %>
+  </div>
+
+  <div>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation, "Passwort bestätigen" %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <%= f.submit "Registrieren" %>
+<% end %>

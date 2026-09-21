@@ -11,4 +11,20 @@ class Employee < ApplicationRecord
   validates :password, length: { minimum: 12 }, allow_nil: true
 
   normalizes :email, with: ->(email) { email.strip.downcase }
+
+  def manager?
+    role == "manager"
+  end
+
+  def kitchen?
+    role == "kitchen"
+  end
+
+  def bar?
+    role == "bar"
+  end
+
+  def server?
+    role == "server"
+  end
 end

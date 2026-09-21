@@ -1,0 +1,4 @@
+<h1>Willkommen, <%= current_employee.name %></h1>
+<p>Rolle: <%= current_employee.role %></p>
+
+<%= button_to "Abmelden", session_path, method: :delete %>
