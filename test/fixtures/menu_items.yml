@@ -1,15 +1,20 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+pizza:
+  name: Margherita Pizza
+  description: Klassisch mit Tomate und Mozzarella
+  price: 14.50
+  department: kitchen
+  available: true
 
-one:
-  name: MyString
-  description: MyText
-  price: 9.99
-  department: MyString
-  available: false
+cola:
+  name: Cola
+  description: 3dl
+  price: 4.50
+  department: bar
+  available: true
 
-two:
-  name: MyString
-  description: MyText
-  price: 9.99
-  department: MyString
+sold_out_pasta:
+  name: Pasta Carbonara
+  description: Aktuell nicht verfügbar
+  price: 16.00
+  department: kitchen
   available: false

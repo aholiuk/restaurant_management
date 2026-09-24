@@ -25,3 +25,10 @@ bar:
   password_digest: <%= BCrypt::Password.create("geheim123456") %>
   role: bar
   active: true
+
+inactive_server:
+  name: Ehemalige Mitarbeiterin
+  email: ehemalige@restaurant.test
+  password_digest: <%= BCrypt::Password.create("geheim123456") %>
+  role: server
+  active: false

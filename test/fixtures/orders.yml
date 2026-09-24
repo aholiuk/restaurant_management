@@ -1,15 +1,10 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+pending_order:
+  order_type: dine_in
+  customer_name: Max Muster
+  table_number: 5
+  status: placed
 
-one:
-  order_type: MyString
-  customer_name: MyString
-  address: MyString
-  table_number: 1
-  status: MyString
-
-two:
-  order_type: MyString
-  customer_name: MyString
-  address: MyString
-  table_number: 1
-  status: MyString
+ready_order:
+  order_type: pickup
+  customer_name: Erika Kundin
+  status: ready

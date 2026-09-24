@@ -13,6 +13,13 @@ class EmployeeTest < ActiveSupport::TestCase
     assert_includes duplicate.errors[:email], "has already been taken"
   end
 
+  test "passwort muss mindestens 12 Zeichen haben" do
+    employee = Employee.new(name: "X", email: "x@restaurant.test",
+                             password: "kurz1234", role: "server")
+    assert_not employee.valid?
+    assert_includes employee.errors[:password], "is too short (minimum is 12 characters)"
+  end
+
   test "unbekannte Rolle ist ungültig" do
     employee = Employee.new(name: "X", email: "x@restaurant.test",
                              password: "irgendwas12345", role: "ceo")
@@ -21,5 +28,16 @@ class EmployeeTest < ActiveSupport::TestCase
 
   test "manager kann sich mit korrektem Passwort authentifizieren" do
     assert employees(:manager).authenticate("geheim123456")
+  end
+
+  test "authenticate schlägt bei falschem Passwort fehl" do
+    assert_not employees(:manager).authenticate("falschesPasswort123")
+  end
+
+  test "nur manager? liefert true für die manager-Fixture" do
+    assert employees(:manager).manager?
+    assert_not employees(:server).manager?
+    assert_not employees(:kitchen).manager?
+    assert_not employees(:bar).manager?
   end
 end

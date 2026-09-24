@@ -1,13 +1,11 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  order: one
-  menu_item: one
+pending_order_pizza:
+  order: pending_order
+  menu_item: pizza
   quantity: 1
-  price_at_order: 9.99
+  price_at_order: 14.50
 
-two:
-  order: two
-  menu_item: two
-  quantity: 1
-  price_at_order: 9.99
+ready_order_cola:
+  order: ready_order
+  menu_item: cola
+  quantity: 2
+  price_at_order: 4.50
