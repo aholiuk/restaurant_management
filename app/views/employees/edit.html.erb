@@ -1,33 +1,41 @@
-<h1>Mitarbeiter bearbeiten</h1>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body p-4">
+        <h1 class="h3 mb-4">Mitarbeiter bearbeiten</h1>
 
-<%= form_with model: @employee, url: employee_path(@employee), method: :patch do |f| %>
-  <% if @employee.errors.any? %>
-    <div>
-      <h2><%= pluralize(@employee.errors.count, "Fehler") %>:</h2>
-      <ul>
-        <% @employee.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+        <%= form_with model: @employee, url: employee_path(@employee), method: :patch do |f| %>
+          <% if @employee.errors.any? %>
+            <div class="alert alert-danger">
+              <h2 class="h6"><%= pluralize(@employee.errors.count, "Fehler") %>:</h2>
+              <ul class="mb-0">
+                <% @employee.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="mb-3">
+            <%= f.label :name, class: "form-label" %>
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :role, "Rolle", class: "form-label" %>
+            <%= f.select :role, Employee::ROLES, {}, class: "form-select" %>
+          </div>
+
+          <div class="form-check mb-3">
+            <%= f.check_box :active, class: "form-check-input" %>
+            <%= f.label :active, "Aktiv", class: "form-check-label" %>
+          </div>
+
+          <%= f.submit "Speichern", class: "btn btn-primary" %>
         <% end %>
-      </ul>
+
+        <%= link_to "Zurück zur Übersicht", employees_path, class: "d-block mt-3" %>
+      </div>
     </div>
-  <% end %>
-
-  <div>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
   </div>
-
-  <div>
-    <%= f.label :role %><br>
-    <%= f.select :role, Employee::ROLES %>
-  </div>
-
-  <div>
-    <%= f.label :active %>
-    <%= f.check_box :active %>
-  </div>
-
-  <%= f.submit "Speichern" %>
-<% end %>
-
-<%= link_to "Zurück zur Übersicht", employees_path %>
+</div>

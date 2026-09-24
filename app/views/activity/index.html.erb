@@ -1,22 +1,24 @@
-<h1>Aktivitäten-Feed</h1>
+<h1 class="mb-4">Aktivitäten-Feed</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Zeitpunkt</th>
-      <th>Bestellung</th>
-      <th>Status</th>
-      <th>Von</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @logs.each do |log| %>
+<div class="table-responsive">
+  <table class="table table-striped align-middle">
+    <thead>
       <tr>
-        <td><%= log.changed_at.strftime("%d.%m.%Y %H:%M:%S") %></td>
-        <td>#<%= log.order.id %> (<%= log.order.customer_name %>)</td>
-        <td><%= log.status %></td>
-        <td><%= log.employee&.name || "Kunde" %></td>
+        <th>Zeitpunkt</th>
+        <th>Bestellung</th>
+        <th>Status</th>
+        <th>Von</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @logs.each do |log| %>
+        <tr>
+          <td class="text-muted"><%= log.changed_at.strftime("%d.%m.%Y %H:%M:%S") %></td>
+          <td>#<%= log.order.id %> (<%= log.order.customer_name %>)</td>
+          <td><span class="badge bg-secondary"><%= log.status %></span></td>
+          <td><%= log.employee&.name || "Kunde" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,20 +1,37 @@
-<h1>Bestellungen</h1>
+<h1 class="mb-4">Bestellungen</h1>
 
-<% @orders.each do |order| %>
-  <div>
-    <strong>#<%= order.id %> – <%= order.customer_name %></strong>
-    (<%= order.order_type %><% if order.table_number %>, Tisch <%= order.table_number %><% end %>)
-    – Status: <%= order.status %>
+<% if @orders.empty? %>
+  <p class="text-muted">Keine offenen Bestellungen.</p>
+<% else %>
+  <div class="row row-cols-1 row-cols-md-2 g-3">
+    <% @orders.each do |order| %>
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="card-title mb-0">
+                #<%= order.id %> – <%= order.customer_name %>
+              </h5>
+              <span class="badge bg-secondary"><%= order.status %></span>
+            </div>
 
-    <ul>
-      <% order.order_items.each do |item| %>
-        <li><%= item.quantity %>x <%= item.menu_item.name %> (<%= item.menu_item.department %>)</li>
-      <% end %>
-    </ul>
+            <p class="card-text text-muted mb-2">
+              <%= { "dine_in" => "Vor Ort", "pickup" => "Abholung", "delivery" => "Lieferung" }[order.order_type] %>
+              <% if order.table_number %> · Tisch <%= order.table_number %><% end %>
+            </p>
 
-    <% if policy(order).update? && order.status != "completed" %>
-      <%= button_to "Weiter zu '#{Order::VALID_TRANSITIONS[order.status].first}'", advance_order_path(order), method: :patch %>
+            <ul class="list-unstyled mb-3">
+              <% order.order_items.each do |item| %>
+                <li><%= item.quantity %>x <%= item.menu_item.name %> <span class="text-muted">(<%= item.menu_item.department == "kitchen" ? "Küche" : "Bar" %>)</span></li>
+              <% end %>
+            </ul>
+
+            <% if policy(order).update? && order.status != "completed" %>
+              <%= button_to "Weiter zu '#{Order::VALID_TRANSITIONS[order.status].first}'", advance_order_path(order), method: :patch, class: "btn btn-sm btn-primary" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     <% end %>
   </div>
-  <hr>
 <% end %>
