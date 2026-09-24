@@ -1,0 +1,24 @@
+<h1>Aktivitäten-Feed</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Zeitpunkt</th>
+      <th>Bestellung</th>
+      <th>Status</th>
+      <th>Von</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @logs.each do |log| %>
+      <tr>
+        <td><%= log.changed_at.strftime("%d.%m.%Y %H:%M:%S") %></td>
+        <td>#<%= log.order.id %> (<%= log.order.customer_name %>)</td>
+        <td><%= log.status %></td>
+        <td><%= log.employee&.name || "Kunde" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Zurück zum Dashboard", dashboard_path %>

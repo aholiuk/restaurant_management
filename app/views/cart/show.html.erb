@@ -17,4 +17,6 @@
   <p><strong>Gesamt: CHF <%= @items.sum { |e| e[:menu_item].price * e[:quantity] } %></strong></p>
 <% end %>
 
+<%= link_to "Zur Kasse", checkout_path %>
+
 <%= link_to "Zurück zur Speisekarte", menu_items_path %>

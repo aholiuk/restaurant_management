@@ -1,0 +1,31 @@
+<h1>Bestellung abschliessen</h1>
+
+<ul>
+  <% @items.each do |entry| %>
+    <li><%= entry[:quantity] %>x <%= entry[:menu_item].name %></li>
+  <% end %>
+</ul>
+
+<%= form_with url: checkout_path, method: :post do |f| %>
+  <div>
+    <%= f.label :customer_name, "Dein Name" %><br>
+    <%= f.text_field :customer_name, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :order_type, "Bestellart" %><br>
+    <%= f.select :order_type, [["Vor Ort", "dine_in"], ["Abholung", "pickup"], ["Lieferung", "delivery"]] %>
+  </div>
+
+  <div>
+    <%= f.label :table_number, "Tischnummer (nur bei Vor Ort)" %><br>
+    <%= f.text_field :table_number %>
+  </div>
+
+  <div>
+    <%= f.label :address, "Adresse (nur bei Lieferung)" %><br>
+    <%= f.text_field :address %>
+  </div>
+
+  <%= f.submit "Bestellung abschicken" %>
+<% end %>

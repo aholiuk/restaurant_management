@@ -1,0 +1,12 @@
+<h1>Danke für deine Bestellung, <%= @order.customer_name %>!</h1>
+
+<p>Bestellnummer: #<%= @order.id %></p>
+<p>Status: <%= @order.status %></p>
+
+<ul>
+  <% @order.order_items.each do |item| %>
+    <li><%= item.quantity %>x <%= item.menu_item.name %> – CHF <%= item.price_at_order * item.quantity %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Zurück zur Speisekarte", menu_items_path %>

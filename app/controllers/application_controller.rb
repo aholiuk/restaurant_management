@@ -27,4 +27,16 @@ class ApplicationController < ActionController::Base
   def handle_unauthorized
     redirect_to dashboard_path, alert: "Dafür hast du keine Berechtigung."
   end
+
+  def cart_items
+    return [] if session[:cart].blank?
+
+    session[:cart].filter_map do |menu_item_id, quantity|
+      menu_item = MenuItem.find_by(id: menu_item_id)
+      next unless menu_item
+
+      { menu_item: menu_item, quantity: quantity }
+    end
+  end
+  helper_method :cart_items
 end

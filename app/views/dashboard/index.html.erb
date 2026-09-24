@@ -7,3 +7,7 @@
 <% if policy(Employee).index? %>
   <%= link_to "Mitarbeiterverwaltung", employees_path %>
 <% end %>
+
+<%= link_to "Bestellungen", orders_path %>
+
+<%= link_to "Aktivitäten-Feed", activity_path %>

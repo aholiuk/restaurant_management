@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "checkout", to: "orders#new"
   post "checkout", to: "orders#create"
   get "orders/:id/confirmation", to: "orders#confirmation", as: :order_confirmation
+  get "activity", to: "activity#index"
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
@@ -24,6 +25,11 @@ Rails.application.routes.draw do
   resource :profile, only: [:show, :edit, :update]
   resources :employees, only: [:index, :edit, :update, :destroy]
   resources :menu_items, path: "menu"
+  resources :orders, only: [:index] do
+    member do
+      patch :advance
+    end
+  end
   root "menu_items#index"
 
 end

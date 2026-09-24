@@ -1,0 +1,20 @@
+<h1>Bestellungen</h1>
+
+<% @orders.each do |order| %>
+  <div>
+    <strong>#<%= order.id %> – <%= order.customer_name %></strong>
+    (<%= order.order_type %><% if order.table_number %>, Tisch <%= order.table_number %><% end %>)
+    – Status: <%= order.status %>
+
+    <ul>
+      <% order.order_items.each do |item| %>
+        <li><%= item.quantity %>x <%= item.menu_item.name %> (<%= item.menu_item.department %>)</li>
+      <% end %>
+    </ul>
+
+    <% if policy(order).update? && order.status != "completed" %>
+      <%= button_to "Weiter zu '#{Order::VALID_TRANSITIONS[order.status].first}'", advance_order_path(order), method: :patch %>
+    <% end %>
+  </div>
+  <hr>
+<% end %>
