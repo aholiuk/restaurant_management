@@ -4,14 +4,14 @@ class OrdersController < ApplicationController
 
   def index
     authorize Order
-    @orders = if current_employee.manager?
+    @orders = if current_employee.manager? || current_employee.server?
                 Order.where.not(status: "completed").order(:created_at)
               else
                 Order.where.not(status: "completed")
-                     .joins(:menu_items)
-                     .where(menu_items: { department: current_employee.role })
-                     .distinct
-                     .order(:created_at)
+                    .joins(:menu_items)
+                    .where(menu_items: { department: current_employee.role })
+                    .distinct
+                    .order(:created_at)
               end
   end
 

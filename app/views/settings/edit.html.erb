@@ -1,0 +1,24 @@
+<h1>Design auswählen</h1>
+
+<%= form_with url: setting_path, method: :patch, scope: :setting do |f| %>
+  <div class="row row-cols-1 row-cols-md-3 g-3">
+    <% Setting::THEMES.each do |key, theme| %>
+      <div class="col">
+        <label class="card h-100 <%= "border-primary border-3" if @setting.theme == key %>" style="cursor: pointer;">
+          <div class="card-body">
+            <div class="d-flex mb-2">
+              <div style="width:24px;height:24px;background:<%= theme[:bg] %>;border:1px solid #ccc;"></div>
+              <div style="width:24px;height:24px;background:<%= theme[:primary] %>;"></div>
+              <div style="width:24px;height:24px;background:<%= theme[:secondary] %>;"></div>
+              <div style="width:24px;height:24px;background:<%= theme[:dark] %>;"></div>
+            </div>
+            <h5 class="card-title"><%= theme[:name] %></h5>
+            <%= f.radio_button :theme, key, checked: @setting.theme == key, class: "form-check-input" %>
+          </div>
+        </label>
+      </div>
+    <% end %>
+  </div>
+
+  <%= f.submit "Speichern", class: "btn btn-primary mt-3" %>
+<% end %>

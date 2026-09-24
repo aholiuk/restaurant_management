@@ -1,13 +1,2 @@
 <h1>Willkommen, <%= current_employee.name %></h1>
 <p>Rolle: <%= current_employee.role %></p>
-
-<%= button_to "Abmelden", session_path, method: :delete %>
-<%= link_to "Mein Profil", profile_path %>
-
-<% if policy(Employee).index? %>
-  <%= link_to "Mitarbeiterverwaltung", employees_path %>
-<% end %>
-
-<%= link_to "Bestellungen", orders_path %>
-
-<%= link_to "Aktivitäten-Feed", activity_path %>

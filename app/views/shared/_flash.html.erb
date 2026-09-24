@@ -1,6 +1,8 @@
-<% if flash[:notice] %>
-  <div data-controller="alert"><%= flash[:notice] %></div>
-<% end %>
-<% if flash[:alert] %>
-  <div data-controller="alert"><%= flash[:alert] %></div>
-<% end %>
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+  <% if flash[:notice] %>
+    <div class="alert alert-success shadow" data-controller="alert"><%= flash[:notice] %></div>
+  <% end %>
+  <% if flash[:alert] %>
+    <div class="alert alert-danger shadow" data-controller="alert"><%= flash[:alert] %></div>
+  <% end %>
+</div>

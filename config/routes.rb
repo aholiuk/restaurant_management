@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   resource :profile, only: [:show, :edit, :update]
   resources :employees, only: [:index, :edit, :update, :destroy]
   resources :menu_items, path: "menu"
+  resource :setting, only: [:edit, :update]
   resources :orders, only: [:index] do
     member do
       patch :advance

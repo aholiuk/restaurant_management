@@ -1,36 +1,49 @@
-<h1>Registrieren</h1>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body p-4">
+        <h1 class="h3 mb-4">Neuen Mitarbeiter anlegen</h1>
 
-<%= form_with model: @employee, url: registration_path do |f| %>
-  <% if @employee.errors.any? %>
-    <div>
-      <h2><%= pluralize(@employee.errors.count, "Fehler") %>:</h2>
-      <ul>
-        <% @employee.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+        <%= form_with model: @employee, url: registration_path do |f| %>
+          <% if @employee.errors.any? %>
+            <div class="alert alert-danger">
+              <h2 class="h6"><%= pluralize(@employee.errors.count, "Fehler") %>:</h2>
+              <ul class="mb-0">
+                <% @employee.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="mb-3">
+            <%= f.label :name, class: "form-label" %>
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :email, class: "form-label" %>
+            <%= f.email_field :email, class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :role, "Rolle", class: "form-label" %>
+            <%= f.select :role, Employee::ROLES, {}, class: "form-select" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :password, class: "form-label" %>
+            <%= f.password_field :password, class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :password_confirmation, "Passwort bestätigen", class: "form-label" %>
+            <%= f.password_field :password_confirmation, class: "form-control" %>
+          </div>
+
+          <%= f.submit "Registrieren", class: "btn btn-primary" %>
         <% end %>
-      </ul>
+      </div>
     </div>
-  <% end %>
-
-  <div>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
   </div>
-
-  <div>
-    <%= f.label :email %><br>
-    <%= f.email_field :email %>
-  </div>
-
-  <div>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </div>
-
-  <div>
-    <%= f.label :password_confirmation, "Passwort bestätigen" %><br>
-    <%= f.password_field :password_confirmation %>
-  </div>
-
-  <%= f.submit "Registrieren" %>
-<% end %>
+</div>

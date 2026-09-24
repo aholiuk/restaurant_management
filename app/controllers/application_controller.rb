@@ -4,7 +4,13 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_employee, :logged_in?
 
+  before_action :set_theme
+
   private
+
+  def set_theme
+    @theme = Setting.current.theme_data
+  end
 
   def current_employee
     @current_employee ||= Employee.find_by(id: session[:employee_id])

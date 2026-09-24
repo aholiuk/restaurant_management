@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_23_140345) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_24_091139) do
   create_table "employees", force: :cascade do |t|
     t.boolean "active", default: true, null: false
     t.string "confirmation_token"
@@ -54,6 +54,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_23_140345) do
     t.string "order_type", null: false
     t.string "status", default: "placed", null: false
     t.integer "table_number"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "theme", default: "rustico", null: false
     t.datetime "updated_at", null: false
   end
 
