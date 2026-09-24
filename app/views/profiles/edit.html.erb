@@ -1,47 +1,55 @@
-<h1>Profil bearbeiten</h1>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body p-4">
+        <h1 class="h3 mb-4">Profil bearbeiten</h1>
 
-<%= form_with model: @employee, url: profile_path, method: :patch do |f| %>
-  <% if @employee.errors.any? %>
-    <div>
-      <h2><%= pluralize(@employee.errors.count, "Fehler") %>:</h2>
-      <ul>
-        <% @employee.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+        <%= form_with model: @employee, url: profile_path, method: :patch do |f| %>
+          <% if @employee.errors.any? %>
+            <div class="alert alert-danger">
+              <h2 class="h6"><%= pluralize(@employee.errors.count, "Fehler") %>:</h2>
+              <ul class="mb-0">
+                <% @employee.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="mb-3">
+            <%= f.label :name, class: "form-label" %>
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+
+          <hr class="my-4">
+          <p class="text-muted small">Nur ausfüllen, wenn du dein Passwort ändern möchtest:</p>
+
+          <div class="mb-3">
+            <%= f.label :current_password, "Aktuelles Passwort", class: "form-label" %>
+            <%= f.password_field :current_password, class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :password, "Neues Passwort", class: "form-label" %>
+            <%= f.password_field :password, class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :password_confirmation, "Neues Passwort bestätigen", class: "form-label" %>
+            <%= f.password_field :password_confirmation, class: "form-control" %>
+          </div>
+
+          <hr class="my-4">
+          <p class="text-muted small">Nur ausfüllen, wenn du deine E-Mail ändern möchtest:</p>
+
+          <div class="mb-3">
+            <%= f.label :new_email, "Neue E-Mail-Adresse", class: "form-label" %>
+            <%= f.email_field :new_email, class: "form-control" %>
+          </div>
+
+          <%= f.submit "Speichern", class: "btn btn-primary" %>
         <% end %>
-      </ul>
+      </div>
     </div>
-  <% end %>
-
-  <div>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
   </div>
-
-  <hr>
-  <p>Nur ausfüllen, wenn du dein Passwort ändern möchtest:</p>
-
-  <div>
-    <%= f.label :current_password, "Aktuelles Passwort" %><br>
-    <%= f.password_field :current_password %>
-  </div>
-
-  <div>
-    <%= f.label :password, "Neues Passwort" %><br>
-    <%= f.password_field :password %>
-  </div>
-
-  <div>
-    <%= f.label :password_confirmation, "Neues Passwort bestätigen" %><br>
-    <%= f.password_field :password_confirmation %>
-  </div>
-
-  <hr>
-  <p>Nur ausfüllen, wenn du deine E-Mail ändern möchtest:</p>
-
-  <div>
-    <%= f.label :new_email, "Neue E-Mail-Adresse" %><br>
-    <%= f.email_field :new_email %>
-  </div>
-
-  <%= f.submit "Speichern" %>
-<% end %>
+</div>
