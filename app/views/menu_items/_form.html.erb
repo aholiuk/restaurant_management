@@ -1,39 +1,47 @@
-<%= form_with model: menu_item do |f| %>
-  <% if menu_item.errors.any? %>
-    <div>
-      <h2><%= pluralize(menu_item.errors.count, "Fehler") %>:</h2>
-      <ul>
-        <% menu_item.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body p-4">
+        <%= form_with model: menu_item do |f| %>
+          <% if menu_item.errors.any? %>
+            <div class="alert alert-danger">
+              <h2 class="h6"><%= pluralize(menu_item.errors.count, "Fehler") %>:</h2>
+              <ul class="mb-0">
+                <% menu_item.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="mb-3">
+            <%= f.label :name, class: "form-label" %>
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :description, "Beschreibung", class: "form-label" %>
+            <%= f.text_area :description, class: "form-control", rows: 3 %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :price, "Preis (CHF)", class: "form-label" %>
+            <%= f.text_field :price, class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :department, "Abteilung", class: "form-label" %>
+            <%= f.select :department, MenuItem::DEPARTMENTS, {}, class: "form-select" %>
+          </div>
+
+          <div class="form-check mb-3">
+            <%= f.check_box :available, class: "form-check-input" %>
+            <%= f.label :available, "Verfügbar", class: "form-check-label" %>
+          </div>
+
+          <%= f.submit "Speichern", class: "btn btn-primary" %>
         <% end %>
-      </ul>
+      </div>
     </div>
-  <% end %>
-
-  <div>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
   </div>
-
-  <div>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-
-  <div>
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-
-  <div>
-    <%= f.label :department %><br>
-    <%= f.select :department, MenuItem::DEPARTMENTS %>
-  </div>
-
-  <div>
-    <%= f.label :available %>
-    <%= f.check_box :available %>
-  </div>
-
-  <%= f.submit "Speichern" %>
-<% end %>
+</div>
