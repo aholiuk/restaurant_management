@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_21_133207) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_23_140345) do
   create_table "employees", force: :cascade do |t|
     t.boolean "active", default: true, null: false
     t.string "confirmation_token"
@@ -57,6 +57,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_21_133207) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "status_logs", force: :cascade do |t|
+    t.datetime "changed_at", null: false
+    t.datetime "created_at", null: false
+    t.integer "employee_id"
+    t.integer "order_id", null: false
+    t.string "status", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_status_logs_on_employee_id"
+    t.index ["order_id"], name: "index_status_logs_on_order_id"
+  end
+
   add_foreign_key "order_items", "menu_items"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "status_logs", "employees"
+  add_foreign_key "status_logs", "orders"
 end

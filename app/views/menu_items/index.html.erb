@@ -1,4 +1,5 @@
 <h1>Speisekarte</h1>
+<%= link_to "Warenkorb ansehen", cart_path %>
 
 <% if logged_in? && policy(MenuItem).create? %>
   <%= link_to "Neuen Artikel anlegen", new_menu_item_path %>
@@ -14,6 +15,9 @@
         <%= item.description %>
         <% if logged_in? && policy(item).update? %>
           <%= link_to "Bearbeiten", edit_menu_item_path(item) %>
+        <% end %>
+        <% if item.available? %>
+          <%= button_to "In den Warenkorb", add_to_cart_path(item.id), method: :post %>
         <% end %>
       </li>
     <% end %>

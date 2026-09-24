@@ -2,8 +2,15 @@ class Order < ApplicationRecord
   ORDER_TYPES = %w[dine_in pickup delivery].freeze
   STATUSES = %w[placed in_progress ready completed].freeze
 
+  VALID_TRANSITIONS = {
+    "placed" => %w[in_progress],
+    "in_progress" => %w[ready],
+    "ready" => %w[completed]
+  }.freeze
+
   has_many :order_items, dependent: :destroy
   has_many :menu_items, through: :order_items
+  has_many :status_logs, -> { order(changed_at: :asc) }, dependent: :destroy
 
   validates :order_type, inclusion: { in: ORDER_TYPES }
   validates :customer_name, presence: true
@@ -33,7 +40,18 @@ class Order < ApplicationRecord
         )
       end
 
+      order.status_logs.create!(employee: nil, status: "placed", changed_at: Time.current)
       order
+    end
+  end
+
+  def advance_status!(to:, employee:)
+    allowed = VALID_TRANSITIONS.fetch(status, [])
+    raise ArgumentError, "ungültiger Übergang von '#{status}' zu '#{to}'" unless allowed.include?(to)
+
+    transaction do
+      update!(status: to)
+      status_logs.create!(employee: employee, status: to, changed_at: Time.current)
     end
   end
 end

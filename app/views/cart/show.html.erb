@@ -1,0 +1,20 @@
+<h1>Warenkorb</h1>
+
+<% if @items.empty? %>
+  <p>Dein Warenkorb ist leer.</p>
+<% else %>
+  <ul>
+    <% @items.each do |entry| %>
+      <li>
+        <%= entry[:quantity] %>x <%= entry[:menu_item].name %>
+        – CHF <%= entry[:menu_item].price * entry[:quantity] %>
+        <% unless entry[:menu_item].available? %> (nicht mehr verfügbar!) <% end %>
+        <%= button_to "Entfernen", remove_from_cart_path(entry[:menu_item].id), method: :post %>
+      </li>
+    <% end %>
+  </ul>
+
+  <p><strong>Gesamt: CHF <%= @items.sum { |e| e[:menu_item].price * e[:quantity] } %></strong></p>
+<% end %>
+
+<%= link_to "Zurück zur Speisekarte", menu_items_path %>
