@@ -1,22 +1,33 @@
-<h1>Warenkorb</h1>
+<h1 class="mb-4">Warenkorb</h1>
 
 <% if @items.empty? %>
-  <p>Dein Warenkorb ist leer.</p>
+  <p class="text-muted">Dein Warenkorb ist leer.</p>
 <% else %>
-  <ul>
-    <% @items.each do |entry| %>
-      <li>
-        <%= entry[:quantity] %>x <%= entry[:menu_item].name %>
-        – CHF <%= entry[:menu_item].price * entry[:quantity] %>
-        <% unless entry[:menu_item].available? %> (nicht mehr verfügbar!) <% end %>
-        <%= button_to "Entfernen", remove_from_cart_path(entry[:menu_item].id), method: :post %>
-      </li>
-    <% end %>
-  </ul>
-
-  <p><strong>Gesamt: CHF <%= @items.sum { |e| e[:menu_item].price * e[:quantity] } %></strong></p>
+  <div class="card">
+    <ul class="list-group list-group-flush">
+      <% @items.each do |entry| %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <strong><%= entry[:menu_item].name %></strong>
+            <% unless entry[:menu_item].available? %>
+              <span class="badge bg-danger ms-2">nicht mehr verfügbar!</span>
+            <% end %>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <%= button_to "−", decrease_cart_item_path(entry[:menu_item].id), method: :post, class: "btn btn-sm btn-outline-secondary" %>
+            <span><%= entry[:quantity] %></span>
+            <%= button_to "+", add_to_cart_path(entry[:menu_item].id), method: :post, class: "btn btn-sm btn-outline-secondary" %>
+            <span class="ms-3">CHF <%= entry[:menu_item].price * entry[:quantity] %></span>
+            <%= button_to "Entfernen", remove_from_cart_path(entry[:menu_item].id), method: :post, class: "btn btn-sm btn-outline-danger" %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+    <div class="card-body d-flex justify-content-between align-items-center">
+      <strong>Gesamt: CHF <%= @items.sum { |e| e[:menu_item].price * e[:quantity] } %></strong>
+      <%= link_to "Zur Kasse", checkout_path, class: "btn btn-primary" %>
+    </div>
+  </div>
 <% end %>
 
-<%= link_to "Zur Kasse", checkout_path %>
-
-<%= link_to "Zurück zur Speisekarte", menu_items_path %>
+<%= link_to "Zurück zur Speisekarte", menu_items_path, class: "d-inline-block mt-3" %>

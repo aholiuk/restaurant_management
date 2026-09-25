@@ -1,12 +1,21 @@
-<h1>Danke für deine Bestellung, <%= @order.customer_name %>!</h1>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body p-4 text-center">
+        <h1 class="h3 mb-3">Danke für deine Bestellung, <%= @order.customer_name %>!</h1>
+        <p class="text-muted">Bestellnummer #<%= @order.id %> · Status: <span class="badge bg-secondary"><%= @order.status %></span></p>
 
-<p>Bestellnummer: #<%= @order.id %></p>
-<p>Status: <%= @order.status %></p>
+        <ul class="list-group list-group-flush text-start my-4">
+          <% @order.order_items.each do |item| %>
+            <li class="list-group-item d-flex justify-content-between">
+              <span><%= item.quantity %>x <%= item.menu_item.name %></span>
+              <span>CHF <%= item.price_at_order * item.quantity %></span>
+            </li>
+          <% end %>
+        </ul>
 
-<ul>
-  <% @order.order_items.each do |item| %>
-    <li><%= item.quantity %>x <%= item.menu_item.name %> – CHF <%= item.price_at_order * item.quantity %></li>
-  <% end %>
-</ul>
-
-<%= link_to "Zurück zur Speisekarte", menu_items_path %>
+        <%= link_to "Zurück zur Speisekarte", menu_items_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>

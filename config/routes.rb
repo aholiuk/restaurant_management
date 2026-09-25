@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post "checkout", to: "orders#create"
   get "orders/:id/confirmation", to: "orders#confirmation", as: :order_confirmation
   get "activity", to: "activity#index"
+  post "cart/decrease/:menu_item_id", to: "cart#decrease", as: :decrease_cart_item
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker

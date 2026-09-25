@@ -25,20 +25,24 @@
       :root {
         --brand-bg: <%= @theme[:bg] %>;
         --brand-primary: <%= @theme[:primary] %>;
+        --brand-primary-text: <%= @theme[:primary_text] %>;
         --brand-secondary: <%= @theme[:secondary] %>;
+        --brand-secondary-text: <%= @theme[:secondary_text] %>;
         --brand-dark: <%= @theme[:dark] %>;
+        --brand-link: <%= @theme[:link_color] %>;
         --brand-font: '<%= @theme[:font] %>', sans-serif;
       }
       body { background-color: var(--brand-bg); font-family: var(--brand-font); }
       .navbar.bg-dark { background-color: var(--brand-dark) !important; }
-      .btn-primary { background-color: var(--brand-primary) !important; border-color: var(--brand-primary) !important; }
-      .btn-success { background-color: var(--brand-secondary) !important; border-color: var(--brand-secondary) !important; }
-      .btn-outline-primary { color: var(--brand-primary) !important; border-color: var(--brand-primary) !important; }
-      .btn-outline-primary:hover { background-color: var(--brand-primary) !important; color: #fff !important; }
+      .btn-primary { background-color: var(--brand-primary) !important; border-color: var(--brand-primary) !important; color: var(--brand-primary-text) !important; }
+      .btn-success { background-color: var(--brand-secondary) !important; border-color: var(--brand-secondary) !important; color: var(--brand-secondary-text) !important; }
+      .btn-outline-primary { color: var(--brand-link) !important; border-color: var(--brand-primary) !important; }
+      .btn-outline-primary:hover { background-color: var(--brand-primary) !important; color: var(--brand-primary-text) !important; }
       .border-primary { border-color: var(--brand-primary) !important; }
-      a { color: var(--brand-primary); }
+      .navbar-nav .dropdown-menu { position: absolute; }
+      a { color: var(--brand-link); }
     </style>
-
+    
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>

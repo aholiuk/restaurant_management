@@ -1,31 +1,44 @@
-<h1>Bestellung abschliessen</h1>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h1 class="mb-4">Bestellung abschliessen</h1>
 
-<ul>
-  <% @items.each do |entry| %>
-    <li><%= entry[:quantity] %>x <%= entry[:menu_item].name %></li>
-  <% end %>
-</ul>
+    <div class="card mb-4">
+      <ul class="list-group list-group-flush">
+        <% @items.each do |entry| %>
+          <li class="list-group-item d-flex justify-content-between">
+            <span><%= entry[:quantity] %>x <%= entry[:menu_item].name %></span>
+            <span>CHF <%= entry[:menu_item].price * entry[:quantity] %></span>
+          </li>
+        <% end %>
+      </ul>
+    </div>
 
-<%= form_with url: checkout_path, method: :post do |f| %>
-  <div>
-    <%= f.label :customer_name, "Dein Name" %><br>
-    <%= f.text_field :customer_name, required: true %>
+    <div class="card">
+      <div class="card-body p-4">
+        <%= form_with url: checkout_path, method: :post do |f| %>
+          <div class="mb-3">
+            <%= f.label :customer_name, "Dein Name", class: "form-label" %>
+            <%= f.text_field :customer_name, class: "form-control", required: true %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :order_type, "Bestellart", class: "form-label" %>
+            <%= f.select :order_type, [["Vor Ort", "dine_in"], ["Abholung", "pickup"], ["Lieferung", "delivery"]], {}, class: "form-select" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :table_number, "Tischnummer (nur bei Vor Ort)", class: "form-label" %>
+            <%= f.text_field :table_number, class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :address, "Adresse (nur bei Lieferung)", class: "form-label" %>
+            <%= f.text_field :address, class: "form-control" %>
+          </div>
+
+          <%= f.submit "Bestellung abschicken", class: "btn btn-primary w-100" %>
+        <% end %>
+      </div>
+    </div>
   </div>
-
-  <div>
-    <%= f.label :order_type, "Bestellart" %><br>
-    <%= f.select :order_type, [["Vor Ort", "dine_in"], ["Abholung", "pickup"], ["Lieferung", "delivery"]] %>
-  </div>
-
-  <div>
-    <%= f.label :table_number, "Tischnummer (nur bei Vor Ort)" %><br>
-    <%= f.text_field :table_number %>
-  </div>
-
-  <div>
-    <%= f.label :address, "Adresse (nur bei Lieferung)" %><br>
-    <%= f.text_field :address %>
-  </div>
-
-  <%= f.submit "Bestellung abschicken" %>
-<% end %>
+</div>
