@@ -1,6 +1,10 @@
 <h1>Design auswählen</h1>
 
 <%= form_with url: setting_path, method: :patch, scope: :setting do |f| %>
+  <div class="mb-4">
+    <%= f.label :restaurant_name, "Name deines Restaurants", class: "form-label" %>
+    <%= f.text_field :restaurant_name, value: @setting.restaurant_name, class: "form-control" %>
+  </div>
   <div class="row row-cols-1 row-cols-md-3 g-3">
     <% Setting::THEMES.each do |key, theme| %>
       <div class="col">

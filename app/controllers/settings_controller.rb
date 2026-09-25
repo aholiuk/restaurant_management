@@ -9,7 +9,7 @@ class SettingsController < ApplicationController
   def update
     @setting = Setting.current
     authorize @setting
-    @setting.update!(theme: params[:setting][:theme])
+    @setting.update!(theme: params[:setting][:theme], restaurant_name: params[:setting][:restaurant_name])
     redirect_to edit_setting_path, notice: "Design aktualisiert."
   end
 end

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Restaurant Management" %></title>
+    <title><%= content_for(:title) || "Rattle" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Restaurant Management">
+    <meta name="application-name" content="Rattle">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -42,13 +42,14 @@
       .navbar-nav .dropdown-menu { position: absolute; }
       a { color: var(--brand-link); }
     </style>
-    
+
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <%= render "shared/restaurant_header" %>
     <%= render "shared/flash" %>
     <%= render "shared/navbar" %>
     <div class="container py-4">
